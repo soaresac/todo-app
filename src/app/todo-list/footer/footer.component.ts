@@ -29,8 +29,7 @@ export class FooterComponent implements OnInit {
   }
 
   clearCompleted() {
-    const todosToRemove = this.todos.filter(todo => todo.isCompleted)
+    const todosToRemove = this.todos.filter(todo => todo.isCompleted);
     this.remove.emit(todosToRemove);
   }
-
 }
