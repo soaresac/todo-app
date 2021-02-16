@@ -1,8 +1,9 @@
 <div class="todo-list">
-  <div class="todo-item" *ngFor="let todo of todos" (click)="onToggle($event, todo)" apApearOnHover HideElement=".remove-item">
+  <div class="todo-item" *ngFor="let todo of todos | filterSelectedOption: filter" 
+  (click)="onToggle($event, todo)" apApearOnHover HideElement=".remove-item">
     <div class="item-container">
       <input type="radio" [checked]="todo.isCompleted">
-      <label>{{todo.text}} </label>
+      <label [ngClass]="{'active': todo.isCompleted}">{{todo.text}} </label>
       <span class="remove-item" (click)="removeItem(todo)">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" 
           d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/>
@@ -10,4 +11,5 @@
       </span>
     </div>
   </div>
+  <app-footer [todos]="todos" (filter)="mudaFiltro($event)" (remove)="removeCompleted($event)"></app-footer>
 </div>

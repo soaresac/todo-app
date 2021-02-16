@@ -10,6 +10,8 @@ export class TodoListComponent implements OnInit {
   
   @Input() todos: Todo[] = [];
   @Output() deleteTodo: EventEmitter<any> = new EventEmitter<any>();
+  @Output() deleteTodos: EventEmitter<any> = new EventEmitter<any>();
+  @Input() filter: string = 'all';
   
   isCompleted: boolean = false;
 
@@ -21,21 +23,18 @@ export class TodoListComponent implements OnInit {
   }
 
   onToggle(event: any, todo: Todo) {
-    var el = event?.currentTarget?.querySelectorAll('label')[0];
-
-    if(!todo.isCompleted) {
-      this.render.setStyle(el, 'text-decoration', 'line-through');
-      this.render.setStyle(el, 'filter', 'opacity(50%)');
-      todo.isCompleted = true;
-    } else {
-      this.render.setStyle(el, 'text-decoration', 'none');
-      this.render.setStyle(el, 'filter', 'opacity(100%)');
-      todo.isCompleted = false;
-    }
-
+    todo.isCompleted = !todo.isCompleted;
   }
 
   removeItem(todo: Todo) {
     this.deleteTodo.emit(todo);
+  }
+
+  mudaFiltro(value: string) {
+    this.filter = value;
+  }
+
+  removeCompleted(todos: Todo[]) {
+    this.deleteTodos.emit(todos);
   }
 }

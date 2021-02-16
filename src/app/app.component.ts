@@ -22,4 +22,8 @@ export class AppComponent implements OnInit {
   removeTodos(todo: Todo) {
     this.todos = this.todos.filter(t => t.id !== todo.id);
   }
+
+  removeAllCompleted(todos: Todo[]) {
+    todos.forEach(todo => this.removeTodos(todo));
+  }
 }

@@ -1,0 +1,11 @@
+<div class="clear"></div>
+<div class='footer'>
+    <div>{{todos | filterActives}} items left</div>
+    <div>
+        <label (click)="showAll()">All</label>
+        <label (click)="showActives()">Active</label>
+        <label (click)="showCompleted()">Completed</label>
+    </div>
+
+    <div (click)="clearCompleted()">Clear Completed</div>
+</div>

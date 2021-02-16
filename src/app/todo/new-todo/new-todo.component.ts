@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Todo } from '../todo';
 
 @Component({
@@ -22,8 +22,6 @@ export class NewTodoComponent implements OnInit {
   }
 
   createNewTodo () {
-
-    console.log(this.todos)
     const newTodoText = this.todoForm.get('todoText')?.value;
 
     if(newTodoText) {
