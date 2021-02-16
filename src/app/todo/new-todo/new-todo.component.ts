@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Todo } from '../todo';
 
@@ -10,27 +10,40 @@ import { Todo } from '../todo';
 export class NewTodoComponent implements OnInit {
 
   todoForm!: FormGroup;
-  todos: Todo[] = [];
+  @Input() todos: Todo[] = [];
+  @Output() newTodo: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.todoForm = this.formBuilder.group({
-      todoText: ['', [Validators.required]]
+      todoText: ['']
     });
   }
 
   createNewTodo () {
+
+    console.log(this.todos)
     const newTodoText = this.todoForm.get('todoText')?.value;
 
-    let newTodo = {
-      id:0, text: newTodoText, isCompleted: false
-    }
-   
-    this.todos.push(newTodo);
+    if(newTodoText) {
+      const ids = this.todos.map(function(o) { return o.id as number});
+      const max = Math.max(...ids);
 
-    console.log("Created " + newTodo + " " + this.todos);
-    this.todoForm.reset();
+      const newTodo: Todo[] = [{
+        id: !this.todos.length ? 0 : (max + 1), 
+        text: newTodoText, 
+        isCompleted: false
+      }]
+    
+      this.todos = newTodo.concat(this.todos);
+
+      //envia valor
+      this.newTodo.emit(this.todos);
+
+      //reseta formulário
+      this.todoForm.reset();
+    }
   }
 
 }

@@ -8,20 +8,22 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { NewTodoComponent } from './todo/new-todo/new-todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { AppearOnHoverModule } from './shared/appear-on-hover.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NewTodoComponent,
-    TodoListComponent
+    TodoListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppearOnHoverModule
   ],
   providers: [],
   bootstrap: [AppComponent]

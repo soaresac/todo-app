@@ -1,5 +1,5 @@
 <app-header></app-header>
 
-<app-new-todo></app-new-todo>
+<app-new-todo [todos] ="todos" (newTodo)="recebeTodos($event)"></app-new-todo>
 
-<app-todo-list [todos] ="todos"></app-todo-list>
+<app-todo-list [todos] ="todos" (deleteTodo)="removeTodos($event)"></app-todo-list>
