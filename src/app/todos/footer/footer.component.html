@@ -1,0 +1,11 @@
+<div class="clear"></div>
+<div class='footer'>
+    <div> {{count}} items left</div>
+    <div>
+        <label (click)="clickedFilter('all')">All</label>
+        <label (click)="clickedFilter('actives')">Active</label>
+        <label (click)="clickedFilter('completed')">Completed</label>
+    </div>
+
+    <div (click)="clickedFilter('clear')">Clear Completed</div>
+</div>

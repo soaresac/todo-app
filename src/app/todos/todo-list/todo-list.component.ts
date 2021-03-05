@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, Renderer2, EventEmitter } from '@angular/core';
-import { Todo } from '../todo/todo';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Todo } from '../../core/todo/todo';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,14 +10,12 @@ export class TodoListComponent implements OnInit {
   
   @Input() todos: Todo[] = [];
   @Output() deleteTodo: EventEmitter<any> = new EventEmitter<any>();
-  @Output() deleteTodos: EventEmitter<any> = new EventEmitter<any>();
   @Input() filter: string = 'all';
+  @Input() text: string = '';
   
   isCompleted: boolean = false;
 
-  constructor(
-    private render: Renderer2
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -30,11 +28,4 @@ export class TodoListComponent implements OnInit {
     this.deleteTodo.emit(todo);
   }
 
-  mudaFiltro(value: string) {
-    this.filter = value;
-  }
-
-  removeCompleted(todos: Todo[]) {
-    this.deleteTodos.emit(todos);
-  }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Todo } from '../todo';
+import { Todo } from '../../core/todo/todo';
 
 @Component({
   selector: 'app-new-todo',

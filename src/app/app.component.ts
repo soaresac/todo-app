@@ -1,5 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Todo } from './todo/todo';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Todo } from './core/todo/todo';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +11,31 @@ export class AppComponent implements OnInit {
   title = 'todo-app';
 
   todos: Todo[] = [];
+  @Output() count: EventEmitter<number> = new EventEmitter<number>();
+  filter: string = "all";
+  text: string = "";
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  setFilter(filtro: string) {
+    this.filter = filtro;
   }
 
-  recebeTodos(todos: Todo[]) {
+  setTexto(filtro: string) {
+    this.text = filtro;
+  }
+
+  setTodos(todos: Todo[]) {
     this.todos = todos;
+    this.count.emit(this.todos.filter(todo => todo.isCompleted).length);
   }
 
-  removeTodos(todo: Todo) {
+  removeTodo(todo: Todo) {
     this.todos = this.todos.filter(t => t.id !== todo.id);
   }
 
-  removeAllCompleted(todos: Todo[]) {
-    todos.forEach(todo => this.removeTodos(todo));
+  removeAllCompleted() {
+    const todosToRemove = this.todos.filter(todo => todo.isCompleted);
+    todosToRemove.forEach(todo => this.removeTodo(todo));
   }
 }

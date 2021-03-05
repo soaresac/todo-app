@@ -1,5 +1,25 @@
 <app-header></app-header>
 
-<app-new-todo [todos] ="todos" (newTodo)="recebeTodos($event)"></app-new-todo>
+<div class="container">
+    <app-new-todo [todos]="todos" 
+        (newTodo)="setTodos($event)">
+    </app-new-todo>
 
-<app-todo-list [todos] ="todos" (deleteTodo)="removeTodos($event)"  (deleteTodos)="removeAllCompleted($event)"></app-todo-list>
+    <app-search (search)="setTexto($event)"></app-search>
+
+    <div class="list-container">
+        <app-todo-list 
+            [filter]="filter"
+            [text]="text"
+            [todos]="todos" 
+            (deleteTodo)="removeTodo($event)">
+        </app-todo-list>
+        
+        <app-footer 
+            *ngIf="todos | filterSelectedOption: 'actives':text as ativos" 
+            [count]="ativos.length" 
+            (clearTodos)="removeAllCompleted()" 
+            (filter)="setFilter($event)">
+        </app-footer>
+    </div>
+</div>

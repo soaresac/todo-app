@@ -1,6 +1,6 @@
 <div class="todo-list">
-  <div class="todo-item" *ngFor="let todo of todos | filterSelectedOption: filter" 
-  (click)="onToggle($event, todo)" apApearOnHover HideElement=".remove-item">
+  <div class="todo-item" *ngFor="let todo of todos | filterSelectedOption: filter:text" 
+  (click)="onToggle($event, todo)" apAppearOnHover HideElement=".remove-item">
     <div class="item-container">
       <input type="radio" [checked]="todo.isCompleted">
       <label [ngClass]="{'active': todo.isCompleted}">{{todo.text}} </label>
@@ -11,5 +11,4 @@
       </span>
     </div>
   </div>
-  <app-footer [todos]="todos" (filter)="mudaFiltro($event)" (remove)="removeCompleted($event)"></app-footer>
 </div>
