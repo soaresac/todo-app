@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.search.unsubscribe();
+        this.subject.unsubscribe();
          
     }
     
